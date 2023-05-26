@@ -21,9 +21,10 @@ class AddNotes extends StatelessWidget {
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             Divider(
+              thickness: 3,
               color: Theme.of(context).colorScheme.onBackground,
-              indent: MediaQuery.of(context).size.width * .4,
-              endIndent: MediaQuery.of(context).size.width * .4,
+              indent: MediaQuery.of(context).size.width * .35,
+              endIndent: MediaQuery.of(context).size.width * .35,
             ),
             SizedBox(height: 10),
             CustomTextFormField(
