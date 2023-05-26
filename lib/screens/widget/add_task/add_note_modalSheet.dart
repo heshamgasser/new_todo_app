@@ -38,12 +38,24 @@ class AddNotes extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: CustomElevatedButton(backgroundColor: Theme.of(context).primaryColor, buttonText: 'Add')
+                    child: CustomElevatedButton(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  buttonText: 'Add',
+                  onTapped: () {
+                    if (formKey.currentState!.validate()) {}
+                  },
+                )),
+                SizedBox(
+                  width: 10,
                 ),
-                SizedBox(width: 10,),
                 Expanded(
-                  child: CustomElevatedButton(backgroundColor: Theme.of(context).colorScheme.error, buttonText: 'Cancel')
-                ),
+                    child: CustomElevatedButton(
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                  buttonText: 'Cancel',
+                  onTapped: () {
+                    Navigator.pop(context);
+                  },
+                )),
               ],
             ),
           ],

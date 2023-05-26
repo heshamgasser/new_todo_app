@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class CustomElevatedButton extends StatelessWidget {
   Color backgroundColor;
   String buttonText;
+  Function onTapped;
 
 
-  CustomElevatedButton({required this.backgroundColor,required this.buttonText});
+  CustomElevatedButton({required this.backgroundColor,required this.buttonText, required this.onTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,9 @@ class CustomElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor
       ),
-      onPressed: () {},
+      onPressed: () {
+        onTapped();
+      },
       child:
       Text(
         buttonText,
