@@ -7,7 +7,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+  SettingScreen({Key? key}) : super(key: key);
+  bool on = true;
 
   @override
   Widget build(BuildContext context) {
