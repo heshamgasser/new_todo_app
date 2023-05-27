@@ -1,7 +1,9 @@
+import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 
 class NotesScreen extends StatelessWidget {
-  const NotesScreen({Key? key}) : super(key: key);
+  DateTime date = DateUtils.dateOnly(DateTime.now());
+  DateTime selectedDate = DateUtils.dateOnly(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -9,6 +11,20 @@ class NotesScreen extends StatelessWidget {
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
+          CalendarTimeline(
+            monthColor: Theme.of(context).colorScheme.onSurface,
+            activeBackgroundDayColor: Theme.of(context).primaryColor,
+            locale: 'en',
+            initialDate: date,
+            firstDate: date,
+            lastDate: date.add(
+              Duration(days: 30),
+            ),
+            onDateSelected: (p0) {
+              selectedDate = p0;
+            },
+          ),
+          SizedBox(height: 20),
           ListTile(
             horizontalTitleGap: 15,
             tileColor: Theme.of(context).colorScheme.background,
