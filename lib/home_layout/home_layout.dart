@@ -1,7 +1,4 @@
 import 'package:app_template/provider/home_layout_provider.dart';
-import 'package:app_template/screens/widget/add_task/add_note_modalSheet.dart';
-import 'package:app_template/screens/note_screen.dart';
-import 'package:app_template/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

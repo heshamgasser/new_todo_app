@@ -12,8 +12,8 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor
-      ),
+          padding: EdgeInsets.symmetric(vertical: 15),
+          backgroundColor: backgroundColor),
       onPressed: () {
         onTapped();
       },

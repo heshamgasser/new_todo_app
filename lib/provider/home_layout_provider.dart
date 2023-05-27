@@ -6,9 +6,9 @@ import '../screens/widget/add_task/add_note_modalSheet.dart';
 
 class HomeLayoutProvider extends ChangeNotifier {
   int selectedItem = 0;
-  List<Widget> screensWidget = [SettingScreen(), NotesScreen()];
+  List<Widget> screensWidget = [NotesScreen(), SettingScreen()];
 
-  void changeIndex (int value){
+  void changeIndex(int value) {
     selectedItem = value;
     notifyListeners();
   }
