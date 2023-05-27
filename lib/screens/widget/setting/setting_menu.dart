@@ -12,6 +12,7 @@ class SettingMenuContainer extends StatelessWidget {
     return InkWell(
       onTap: () {
         showModalBottomSheet(
+          backgroundColor: Theme.of(context).colorScheme.surface,
           isScrollControlled: true,
           context: context,
           builder: (context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'app_colors.dart';
 import 'app_text.dart';
 
@@ -56,7 +57,7 @@ class MyThemeData {
         onError: Colors.white,
         background: darkBackgroundColor,
         onBackground: Colors.white,
-        surface: Colors.black,
+        surface: darkBackgroundColor,
         onSurface: Colors.white),
     scaffoldBackgroundColor: darkBackgroundColor,
     appBarTheme: const AppBarTheme(
