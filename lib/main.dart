@@ -14,12 +14,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ChangeNotifierProvider(
-      create: (context) => AppProvider(), child: AppTemplate()));
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppProvider(),
+      child: TodoApp(),
+    ),
+  );
 }
 
-class AppTemplate extends StatelessWidget {
-  const AppTemplate({Key? key}) : super(key: key);
+class TodoApp extends StatelessWidget {
+  const TodoApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
