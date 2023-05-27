@@ -3,6 +3,7 @@ import 'package:app_template/screens/widget/add_task/custom_elevatedButton.dart'
 import 'package:app_template/screens/widget/add_task/custom_textFormField.dart';
 import 'package:app_template/screens/widget/add_task/date_time_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class AddNotes extends StatefulWidget {
@@ -31,7 +32,7 @@ class _AddNotesState extends State<AddNotes> {
               children: [
                 Center(
                   child: Text(
-                    'Add Task',
+                    AppLocalizations.of(context)!.addTask,
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                 ),
@@ -43,14 +44,15 @@ class _AddNotesState extends State<AddNotes> {
                 ),
                 SizedBox(height: 10),
                 CustomTextFormField(
-                    hint: 'Enter Your Task', controller: taskController),
+                    hint: AppLocalizations.of(context)!.taskTitle,
+                    controller: taskController),
                 SizedBox(height: 10),
                 CustomTextFormField(
-                    hint: 'Task Description',
+                    hint: AppLocalizations.of(context)!.taskDetail,
                     maxLines: 5,
                     controller: descriptionController),
                 SizedBox(height: 10),
-                Text('Task Date & Time',
+                Text(AppLocalizations.of(context)!.taskDateTime,
                     style: Theme.of(context).textTheme.bodyMedium),
                 SizedBox(
                   height: 10,
@@ -85,7 +87,7 @@ class _AddNotesState extends State<AddNotes> {
                     Expanded(
                       child: CustomElevatedButton(
                         backgroundColor: Theme.of(context).primaryColor,
-                        buttonText: 'Add',
+                        buttonText: AppLocalizations.of(context)!.add,
                         onTapped: () {
                           if (formKey.currentState!.validate()) {}
                         },
@@ -96,8 +98,8 @@ class _AddNotesState extends State<AddNotes> {
                     ),
                     Expanded(
                         child: CustomElevatedButton(
-                      backgroundColor: Theme.of(context).colorScheme.error,
-                      buttonText: 'Cancel',
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                      buttonText: AppLocalizations.of(context)!.cancel,
                       onTapped: () {
                         Navigator.pop(context);
                       },

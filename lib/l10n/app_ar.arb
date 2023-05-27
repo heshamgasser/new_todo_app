@@ -9,6 +9,7 @@
   "addTask": "إضافة مهمة جديدة",
   "taskTitle": "أدخل عنوان مهمتك",
   "taskDetail": "أدخل تفاصيل مهمتك",
+  "taskDateTime": "تاريخ و وقت المهمة",
   "selectStartDate": "تاريخ البداية",
   "selectTaskDate": "تاريخ بداية المهمة",
   "selectEndDate": "تاريخ النهاية",

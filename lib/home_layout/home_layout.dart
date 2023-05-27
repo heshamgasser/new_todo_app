@@ -1,5 +1,6 @@
 import 'package:app_template/provider/home_layout_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -15,7 +16,7 @@ class HomeScreen extends StatelessWidget {
           extendBody: true,
           appBar: AppBar(
             title: Text(
-              'To Do List',
+              AppLocalizations.of(context)!.todoList,
               style: Theme.of(context).textTheme.titleLarge,
             ),
           ),

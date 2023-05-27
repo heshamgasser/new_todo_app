@@ -9,6 +9,7 @@
   "addTask": "Add New task",
   "taskTitle": "Enter Your Task Title",
   "taskDetail": "Enter Your Task Details",
+  "taskDateTime": "Task Date & Time",
   "selectStartDate": "Select Start Date",
   "selectTaskDate": "Select Task Date",
   "selectEndDate": "Select End Date",

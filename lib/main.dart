@@ -1,12 +1,14 @@
 import 'package:app_template/home_layout/home_layout.dart';
+import 'package:app_template/provider/app_provider.dart';
 import 'package:app_template/shared/style/myThemeData.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(AppTemplate());
+  runApp(ChangeNotifierProvider(
+      create: (context) => AppProvider(), child: AppTemplate()));
 }
 
 class AppTemplate extends StatelessWidget {
@@ -14,10 +16,13 @@ class AppTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appProvider = Provider.of<AppProvider>(context);
+    appProvider.getSharedPreferences();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
+      themeMode: appProvider.themeMode,
       localizationsDelegates: [
         AppLocalizations.delegate, // Add this line
         GlobalMaterialLocalizations.delegate,
@@ -28,7 +33,7 @@ class AppTemplate extends StatelessWidget {
         Locale('en'), // English
         Locale('ar'), // Arabic
       ],
-
+      locale: Locale(appProvider.language),
       initialRoute: HomeScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
