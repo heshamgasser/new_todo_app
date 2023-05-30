@@ -43,6 +43,7 @@ dependencies:
   shared_preferences: ^2.1.1
   calendar_timeline: ^1.1.2
   firebase_core: ^2.13.0
+  cloud_firestore: ^4.8.0
 
 dev_dependencies:
   flutter_test:
