@@ -22,6 +22,7 @@
   "edit": "تحرير",
   "open": "فتح",
   "update": "تحديث",
+  "updateDateTime": "تحديث التاريخ و الوقت",
   "editTask": "تحرير المهمة",
   "noTasks": "لا توجد مهام لهذا اليوم",
   "wrongMessage": "هناك خطأ ما",

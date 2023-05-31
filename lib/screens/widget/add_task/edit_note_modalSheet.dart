@@ -90,7 +90,7 @@ class _EditTaskModalSheetState extends State<EditTaskModalSheet> {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      'Update Date & Time',
+                      AppLocalizations.of(context)!.updateDateTime,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -174,15 +174,17 @@ class _EditTaskModalSheetState extends State<EditTaskModalSheet> {
                       width: 10,
                     ),
                     Expanded(
-                        child: CustomElevatedButton(
-                      backgroundColor: Theme.of(context).colorScheme.error,
-                      buttonText: AppLocalizations.of(context)!.cancel,
-                      onTapped: () {
-                        Navigator.pop(context);
-                      },
-                    )),
+                      child: CustomElevatedButton(
+                        backgroundColor: Theme.of(context).colorScheme.error,
+                        buttonText: AppLocalizations.of(context)!.cancel,
+                        onTapped: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
                   ],
                 ),
+                SizedBox(height: 15),
               ],
             ),
           ),

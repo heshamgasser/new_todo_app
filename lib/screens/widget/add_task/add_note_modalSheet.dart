@@ -129,6 +129,7 @@ class _AddNotesState extends State<AddNotes> {
                     )),
                   ],
                 ),
+                SizedBox(height: 15)
               ],
             ),
           ),
