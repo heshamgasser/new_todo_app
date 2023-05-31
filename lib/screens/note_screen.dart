@@ -26,9 +26,6 @@ class _NotesScreenState extends State<NotesScreen> {
           child: Column(
             children: [
               CalendarTimeline(
-                monthColor: Theme.of(context).colorScheme.onSurface,
-                activeBackgroundDayColor: Theme.of(context).primaryColor,
-                locale: 'en',
                 initialDate: selectedDate,
                 firstDate: selectedDate.subtract(
                   Duration(days: 30),
@@ -41,6 +38,12 @@ class _NotesScreenState extends State<NotesScreen> {
                     selectedDate = p0;
                   });
                 },
+                leftMargin: 10,
+                monthColor: Theme.of(context).colorScheme.onSurface,
+                dayColor: Theme.of(context).colorScheme.onSurface,
+                activeDayColor: Colors.white,
+                activeBackgroundDayColor: Theme.of(context).primaryColor,
+                dotsColor: Color(0xFF333A47),
               ),
               SizedBox(height: 20),
               StreamBuilder(
