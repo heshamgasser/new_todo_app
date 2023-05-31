@@ -1,7 +1,9 @@
+import 'package:app_template/models/task_model.dart';
 import 'package:app_template/provider/date_time_provider.dart';
 import 'package:app_template/screens/widget/add_task/custom_elevatedButton.dart';
 import 'package:app_template/screens/widget/add_task/custom_textFormField.dart';
 import 'package:app_template/screens/widget/add_task/date_time_widget.dart';
+import 'package:app_template/shared/network/firebase/firebase_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +14,9 @@ class AddNotes extends StatefulWidget {
 }
 
 class _AddNotesState extends State<AddNotes> {
-  TextEditingController taskController = TextEditingController();
+  TextEditingController taskTitleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  bool status = false;
   GlobalKey<FormState> formKey = GlobalKey();
 
   @override
@@ -25,7 +28,11 @@ class _AddNotesState extends State<AddNotes> {
         return Form(
           key: formKey,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.only(
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
@@ -45,7 +52,7 @@ class _AddNotesState extends State<AddNotes> {
                 SizedBox(height: 10),
                 CustomTextFormField(
                     hint: AppLocalizations.of(context)!.taskTitle,
-                    controller: taskController),
+                    controller: taskTitleController),
                 SizedBox(height: 10),
                 CustomTextFormField(
                     hint: AppLocalizations.of(context)!.taskDetail,
@@ -62,7 +69,7 @@ class _AddNotesState extends State<AddNotes> {
                     Expanded(
                       child: DateTimeWidget(
                         childText:
-                            dateTimeProvider.date.toString().substring(0, 10),
+                        dateTimeProvider.date.toString().substring(0, 10),
                         onTapped: () {
                           dateTimeProvider.onDateTapped(context);
                         },
@@ -89,7 +96,23 @@ class _AddNotesState extends State<AddNotes> {
                         backgroundColor: Theme.of(context).primaryColor,
                         buttonText: AppLocalizations.of(context)!.add,
                         onTapped: () {
-                          if (formKey.currentState!.validate()) {}
+                          if (formKey.currentState!.validate()) {
+                            TaskModel task = TaskModel(
+                                title: taskTitleController.text,
+                                description: descriptionController.text,
+                                date: dateTimeProvider.date
+                                    .toString()
+                                    .substring(0, 10),
+                                time: dateTimeProvider.initialTime
+                                    .format(context)
+                                    .toString(),
+                                status: status);
+                            FirebaseFunctions.addTask(task).then(
+                              (value) {
+                                Navigator.pop(context);
+                              },
+                            );
+                          }
                         },
                       ),
                     ),

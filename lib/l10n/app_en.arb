@@ -24,5 +24,6 @@
   "editTask": "Edit Task",
   "wrongMessage": "Something Went Wrong",
   "tryAgain": "Try Again",
+  "noTasks": "There is No Tasks for Today",
   "fieldRequired": "Field Required"
 }

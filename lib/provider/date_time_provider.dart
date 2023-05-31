@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 class DateTimeProvider extends ChangeNotifier {
   DateTime initialDate = DateUtils.dateOnly(DateTime.now());
   TimeOfDay initialTime = TimeOfDay.now();
-
   // TimeOfDay time = TimeOfDay.now();
-
   DateTime date = DateUtils.dateOnly(DateTime.now());
 
   void onDateTapped(BuildContext context) async {

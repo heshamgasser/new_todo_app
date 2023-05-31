@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, child) {
         var provider = Provider.of<HomeLayoutProvider>(context);
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           extendBody: true,
           appBar: AppBar(
             title: Text(
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
               unselectedItemColor: Colors.grey,
               currentIndex: provider.selectedItem,
               onTap: (value) {
-              provider.changeIndex(value);
+                provider.changeIndex(value);
               },
               backgroundColor: Colors.white,
               items: [
@@ -60,7 +61,7 @@ class HomeScreen extends StatelessWidget {
               side: BorderSide(color: Colors.white, width: 3),
             ),
             onPressed: () {
-             provider.showAddTask(context);
+              provider.showAddTask(context);
             },
             child: Icon(
               Icons.add,

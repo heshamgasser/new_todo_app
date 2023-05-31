@@ -22,6 +22,7 @@
   "edit": "تحرير",
   "open": "فتح",
   "editTask": "تحرير المهمة",
+  "noTasks": "لا توجد مهام لهذا اليوم",
   "wrongMessage": "هناك خطأ ما",
   "tryAgain": "حاول مرة أخري",
   "fieldRequired": "حقل إجباري"

@@ -1,11 +1,18 @@
+import 'package:app_template/models/task_model.dart';
 import 'package:app_template/provider/date_time_provider.dart';
+import 'package:app_template/screens/widget/add_task/task_item.dart';
+import 'package:app_template/shared/network/firebase/firebase_function.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
-class NotesScreen extends StatelessWidget {
-  DateTime date = DateUtils.dateOnly(DateTime.now());
+class NotesScreen extends StatefulWidget {
+  @override
+  State<NotesScreen> createState() => _NotesScreenState();
+}
+
+class _NotesScreenState extends State<NotesScreen> {
   DateTime selectedDate = DateUtils.dateOnly(DateTime.now());
 
   @override
@@ -19,113 +26,59 @@ class NotesScreen extends StatelessWidget {
           child: Column(
             children: [
               CalendarTimeline(
-                monthColor: Theme
-                    .of(context)
-                    .colorScheme
-                    .onSurface,
-                activeBackgroundDayColor: Theme
-                    .of(context)
-                    .primaryColor,
+                monthColor: Theme.of(context).colorScheme.onSurface,
+                activeBackgroundDayColor: Theme.of(context).primaryColor,
                 locale: 'en',
-                initialDate: date,
-                firstDate: date.subtract(
+                initialDate: selectedDate,
+                firstDate: selectedDate.subtract(
                   Duration(days: 30),
                 ),
-                lastDate: date.add(
+                lastDate: selectedDate.add(
                   Duration(days: 30),
                 ),
                 onDateSelected: (p0) {
-                  selectedDate = p0;
+                  setState(() {
+                    selectedDate = p0;
+                  });
                 },
               ),
               SizedBox(height: 20),
-              ListTile(
-                horizontalTitleGap: 15,
-                tileColor: Theme
-                    .of(context)
-                    .colorScheme
-                    .background,
-                contentPadding:
-                EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  side: BorderSide(
-                      color: Theme
-                          .of(context)
-                          .colorScheme
-                          .onSurface),
-                ),
-                title: Text(
-                  'Hesham gasser',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium,
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'This is My Task',
-                      style: Theme
-                          .of(context)
-                          .textTheme
-                          .bodyMedium,
-                    ),
-                    SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Icon(
-                          CupertinoIcons.time,
-                          size: 20,
-                          color: Theme
-                              .of(context)
-                              .colorScheme
-                              .onSurface,
-                        ),
-                        SizedBox(width: 10),
-                        Text(
-                          pro.initialTime.format(context).toString(),
-                          style: Theme
-                              .of(context)
-                              .textTheme
-                              .bodySmall,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                isThreeLine: true,
-                leading: VerticalDivider(
-                  color: Theme
-                      .of(context)
-                      .primaryColor,
-                  thickness: 3,
-                ),
-                trailing: Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width * .2,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height * .05,
-                  decoration: BoxDecoration(
-                      color: Theme
-                          .of(context)
-                          .primaryColor,
-                      borderRadius: BorderRadius.circular(20),
-                      shape: BoxShape.rectangle),
-                  child: Icon(
-                    Icons.done,
-                    size: 30,
-                    color: Theme
-                        .of(context)
-                        .colorScheme
-                        .surface,
-                  ),
-                ),
+              StreamBuilder(
+                stream: FirebaseFunctions.getTasksFromFirebase(selectedDate),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.wrongMessage,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    );
+                  }
+                  List<TaskModel> tasks =
+                      snapshot.data?.docs.map((doc) => doc.data()).toList() ??
+                          [];
+                  return tasks.isEmpty
+                      ? Center(
+                          child: Text(
+                            AppLocalizations.of(context)!.noTasks,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        )
+                      : Expanded(
+                          child: ListView.separated(
+                              itemBuilder: (context, index) {
+                                return TaskItem(
+                                  tasks[index],
+                                );
+                              },
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 10),
+                              itemCount: tasks.length),
+                        );
+                },
               ),
             ],
           ),
