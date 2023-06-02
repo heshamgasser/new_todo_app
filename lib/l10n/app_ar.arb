@@ -24,6 +24,7 @@
   "update": "تحديث",
   "updateDateTime": "تحديث التاريخ و الوقت",
   "editTask": "تحرير المهمة",
+  "taskComplet": "تم انتهاء المهمة",
   "noTasks": "لا توجد مهام لهذا اليوم",
   "wrongMessage": "هناك خطأ ما",
   "tryAgain": "حاول مرة أخري",

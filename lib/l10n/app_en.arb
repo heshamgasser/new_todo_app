@@ -23,6 +23,7 @@
   "open": "Open",
   "update": "Update",
   "updateDateTime": "Update Date & Time",
+  "taskComplet": "Task is Done",
   "editTask": "Edit Task",
   "wrongMessage": "Something Went Wrong",
   "tryAgain": "Try Again",

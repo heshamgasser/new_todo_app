@@ -20,7 +20,6 @@ class _NotesScreenState extends State<NotesScreen> {
     return ChangeNotifierProvider(
       create: (context) => DateTimeProvider(),
       builder: (context, child) {
-        var pro = Provider.of<DateTimeProvider>(context);
         return Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -38,6 +37,7 @@ class _NotesScreenState extends State<NotesScreen> {
                     selectedDate = p0;
                   });
                 },
+                locale: 'en',
                 leftMargin: 10,
                 monthColor: Theme.of(context).colorScheme.onSurface,
                 dayColor: Theme.of(context).colorScheme.onSurface,

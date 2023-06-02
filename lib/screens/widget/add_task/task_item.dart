@@ -16,7 +16,7 @@ class TaskItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       startActionPane: ActionPane(
-        extentRatio: .3,
+        extentRatio: .35,
         motion: ScrollMotion(),
         // dismissible: DismissiblePane(onDismissed: () {}),
         children: [
@@ -33,26 +33,35 @@ class TaskItem extends StatelessWidget {
         ],
       ),
       endActionPane: ActionPane(
-        extentRatio: .3,
+        extentRatio: .4,
         motion: ScrollMotion(),
         children: [
-          SlidableAction(
-            borderRadius: BorderRadius.circular(20),
-            onPressed: (context) {
-              //TODO: making new screen for update and adding firebase Function to ok button
-              showModalBottomSheet(
-                isScrollControlled: true,
-                context: context,
-                builder: (context) {
-                  return EditTaskModalSheet(taskModel);
-                },
-              );
-            },
-            backgroundColor: Color(0xFF21B7CA),
-            foregroundColor: Colors.white,
-            icon: Icons.edit,
-            label: AppLocalizations.of(context)!.edit,
-          ),
+          taskModel.status
+              ? SlidableAction(
+                  borderRadius: BorderRadius.circular(20),
+                  onPressed: (context) {},
+                  backgroundColor: Color(0xFF21B7CA),
+                  foregroundColor: Colors.white,
+                  icon: Icons.done,
+                  label: AppLocalizations.of(context)!.taskComplet,
+                )
+              : SlidableAction(
+                  borderRadius: BorderRadius.circular(20),
+                  onPressed: (context) {
+                    //TODO: making new screen for update and adding firebase Function to ok button
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) {
+                        return EditTaskModalSheet(taskModel);
+                      },
+                    );
+                  },
+                  backgroundColor: Color(0xFF21B7CA),
+                  foregroundColor: Colors.white,
+                  icon: Icons.edit,
+                  label: AppLocalizations.of(context)!.edit,
+                ),
         ],
       ),
       child: Row(
@@ -82,14 +91,11 @@ class TaskItem extends StatelessWidget {
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      taskModel.description,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
+                  Text(
+                    taskModel.description,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   SizedBox(height: 5),
                   Row(

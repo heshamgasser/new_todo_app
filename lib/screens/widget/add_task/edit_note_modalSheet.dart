@@ -161,12 +161,8 @@ class _EditTaskModalSheetState extends State<EditTaskModalSheet> {
                                           .toString(),
                                   status: status);
                               FirebaseFunctions.updateTask(
-                                      widget.taskModel.id, updatedTask)
-                                  .then(
-                                (value) {
-                                  Navigator.pop(context);
-                                },
-                              );
+                                  widget.taskModel.id, updatedTask);
+                              Navigator.pop(context);
                             }
                           },
                         ),

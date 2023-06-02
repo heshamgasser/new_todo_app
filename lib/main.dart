@@ -1,6 +1,9 @@
 import 'package:app_template/home_layout/home_layout.dart';
 import 'package:app_template/provider/app_provider.dart';
+import 'package:app_template/screens/login_screen.dart';
+import 'package:app_template/screens/signUp_screen.dart';
 import 'package:app_template/shared/style/myThemeData.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,6 +17,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseFirestore.instance.disableNetwork();
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppProvider(),
@@ -45,9 +49,11 @@ class TodoApp extends StatelessWidget {
         Locale('ar'), // Arabic
       ],
       locale: Locale(appProvider.language),
-      initialRoute: HomeScreen.routeName,
+      initialRoute: LoginScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
+        LoginScreen.routeName: (context) => LoginScreen(),
+        SignUpScreen.routeName: (context) => SignUpScreen(),
       },
     );
   }
