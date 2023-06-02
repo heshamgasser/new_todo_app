@@ -3,6 +3,7 @@ import 'package:app_template/screens/widget/login_signUp_widgets/custom_email_te
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_password_textFormField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String routeName = 'Sign up Screen';
@@ -48,29 +49,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   CustomTextFormField(
-                      label: 'First Name',
+                      label: AppLocalizations.of(context)!.fName,
                       suffix: Icons.person,
                       controller: fNameController),
                   SizedBox(height: 15),
                   CustomTextFormField(
-                    label: 'Last Name',
+                    label: AppLocalizations.of(context)!.lName,
                     suffix: Icons.person,
                     controller: lNameController,
                   ),
                   SizedBox(height: 15),
                   CustomTextFormField(
-                    label: 'User Name',
+                    label: AppLocalizations.of(context)!.userNameEmail,
                     suffix: Icons.supervised_user_circle,
                     controller: usernameController,
                   ),
                   SizedBox(height: 15),
                   CustomTextFormField(
-                      label: 'Email',
+                      label: AppLocalizations.of(context)!.email,
                       suffix: Icons.email_outlined,
                       controller: emailController),
                   SizedBox(height: 15),
                   CustomPasswordTextFormField(
-                    label: 'Password',
+                    label: AppLocalizations.of(context)!.password,
                     controller: passwordController,
                     obscure: secure,
                     onTapped: () {
@@ -85,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         backgroundColor: Theme.of(context).primaryColor),
                     onPressed: () {},
                     child: Text(
-                      'Sign up',
+                      AppLocalizations.of(context)!.signUp,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
@@ -94,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Have an Account",
+                        AppLocalizations.of(context)!.haveAccount,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       TextButton(
@@ -102,7 +103,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.pushReplacementNamed(
                               context, LoginScreen.routeName);
                         },
-                        child: Text('Login',
+                        child: Text(AppLocalizations.of(context)!.login,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!

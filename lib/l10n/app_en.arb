@@ -28,5 +28,14 @@
   "wrongMessage": "Something Went Wrong",
   "tryAgain": "Try Again",
   "noTasks": "There is No Tasks for Today",
+  "fName": "First Name",
+  "lName": "Last Name",
+  "email": "Email",
+  "userNameEmail": "user Name or Email",
+  "password": "Password",
+  "login": "Login",
+  "signUp": "Sign Up",
+  "noAccount": "Don't Have an Account",
+  "haveAccount": "Already Have an Account",
   "fieldRequired": "Field Required"
 }

@@ -28,5 +28,14 @@
   "noTasks": "لا توجد مهام لهذا اليوم",
   "wrongMessage": "هناك خطأ ما",
   "tryAgain": "حاول مرة أخري",
+  "fName": "الإسم الأول",
+  "lName": "اسم العائلة",
+  "email": "الإيميل",
+  "userNameEmail": "إسم المستخدم أو الإيميل",
+  "password": "كلمة السر",
+  "login": "تسجيل الدخول",
+  "signUp": "تسجيل",
+  "noAccount": "ليس لديك حساب",
+  "haveAccount": "لديك حساب بالفعل",
   "fieldRequired": "حقل إجباري"
 }

@@ -4,6 +4,7 @@ import 'package:app_template/screens/widget/login_signUp_widgets/custom_email_te
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_password_textFormField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'Login Screen';
@@ -31,6 +32,24 @@ class _LoginScreenState extends State<LoginScreen> {
           fit: BoxFit.fill,
         ),
         Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            leading: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('EN'),
+                SizedBox(width: 5),
+                Switch(
+                  value: true,
+                  onChanged: (value) {},
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text('AR'),
+              ],
+            ),
+          ),
           backgroundColor: Colors.transparent,
           body: Padding(
             padding:
@@ -42,13 +61,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   CustomTextFormField(
-                    label: 'User Name or Email',
+                    label: AppLocalizations.of(context)!.userNameEmail,
                     suffix: Icons.email_outlined,
                     controller: emailController,
                   ),
                   SizedBox(height: 15),
                   CustomPasswordTextFormField(
-                    label: 'Password',
+                    label: AppLocalizations.of(context)!.password,
                     controller: passwordController,
                     obscure: secure,
                     onTapped: () {
@@ -66,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context, HomeScreen.routeName);
                     },
                     child: Text(
-                      'Login',
+                      AppLocalizations.of(context)!.login,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
@@ -75,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't Have an Account",
+                        AppLocalizations.of(context)!.noAccount,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       TextButton(
@@ -83,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pushReplacementNamed(
                               context, SignUpScreen.routeName);
                         },
-                        child: Text('Sign Up',
+                        child: Text(AppLocalizations.of(context)!.signUp,
                             style: Theme.of(context)
                                 .textTheme
                                 .bodySmall!
