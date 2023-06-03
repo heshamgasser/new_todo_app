@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Text('Welcome'),
                   SizedBox(height: 5),
-                  Text(appProvider.currentUser!.firstName)
+                  Text('${appProvider.currentUser?.firstName}')
                 ],
               ),
               SizedBox(width: 5),

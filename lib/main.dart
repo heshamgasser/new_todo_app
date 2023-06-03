@@ -49,7 +49,9 @@ class TodoApp extends StatelessWidget {
         Locale('ar'), // Arabic
       ],
       locale: Locale(appProvider.language),
-      initialRoute: LoginScreen.routeName,
+      initialRoute: appProvider.firebaseUser == null
+          ? LoginScreen.routeName
+          : HomeScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
         LoginScreen.routeName: (context) => LoginScreen(),

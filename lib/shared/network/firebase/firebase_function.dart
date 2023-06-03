@@ -26,6 +26,7 @@ class FirebaseFunctions {
       DateTime dateTime) {
     var collection = getTasksCollection();
     return collection
+        .where('userId', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .where("date",
             isEqualTo: DateUtils.dateOnly(dateTime).toString().substring(0, 10))
         .snapshots();
@@ -100,7 +101,8 @@ class FirebaseFunctions {
   }
 
   static Future<UserModel?> readUser(String id) async {
-    DocumentSnapshot<UserModel> user = await getUsersCollection().doc(id).get();
-    return user.data();
+    DocumentSnapshot<UserModel> userSnap =
+        await getUsersCollection().doc(id).get();
+    return userSnap.data();
   }
 }
