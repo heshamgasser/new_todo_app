@@ -4,6 +4,7 @@ import 'package:app_template/screens/widget/add_task/custom_elevatedButton.dart'
 import 'package:app_template/screens/widget/add_task/custom_textFormField.dart';
 import 'package:app_template/screens/widget/add_task/date_time_widget.dart';
 import 'package:app_template/shared/network/firebase/firebase_function.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -99,6 +100,8 @@ class _AddNotesState extends State<AddNotes> {
                           onTapped: () {
                             if (formKey.currentState!.validate()) {
                               TaskModel task = TaskModel(
+                                  userId:
+                                      FirebaseAuth.instance.currentUser!.uid,
                                   title: taskTitleController.text,
                                   description: descriptionController.text,
                                   date: dateTimeProvider.date

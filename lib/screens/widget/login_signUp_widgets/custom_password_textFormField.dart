@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomPasswordTextFormField extends StatelessWidget {
   bool obscure;
@@ -18,6 +19,12 @@ class CustomPasswordTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return AppLocalizations.of(context)!.fieldRequired;
+        }
+        return null;
+      },
       textInputAction: TextInputAction.next,
       obscureText: obscure,
       decoration: InputDecoration(

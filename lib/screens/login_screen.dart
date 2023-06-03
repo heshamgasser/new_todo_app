@@ -3,6 +3,8 @@ import 'package:app_template/provider/app_provider.dart';
 import 'package:app_template/screens/signUp_screen.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_email_textFormField.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_password_textFormField.dart';
+import 'package:app_template/shared/network/firebase/firebase_function.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -49,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: Colors.transparent,
           body: Padding(
             padding:
-            const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
+                const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
             child: Form(
               key: loginFormKey,
               child: Column(
@@ -61,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        CustomTextFormField(
+                        CustomEmailTextFormField(
                           label: AppLocalizations.of(context)!.email,
                           suffix: Icons.email_outlined,
                           controller: emailController,
@@ -83,8 +85,31 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Theme.of(context).primaryColor),
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, HomeScreen.routeName);
+                            if (loginFormKey.currentState!.validate()) {
+                              FirebaseFunctions.logIn(
+                                emailController.text,
+                                passwordController.text,
+                                (value) {
+                                  AwesomeDialog(
+                                    dismissOnTouchOutside: false,
+                                    context: context,
+                                    dialogType: DialogType.ERROR,
+                                    animType: AnimType.SCALE,
+                                    title: 'Dialog Title',
+                                    desc:
+                                        'Sorry, your Email or Password is Incorrect. Please Try Again',
+                                    btnCancelOnPress: () {},
+                                    btnOkOnPress: () {},
+                                  )..show();
+                                },
+                                () {
+                                  // pro.getSavedlogin(emailController.text);
+                                  pro.initUser();
+                                  Navigator.pushReplacementNamed(
+                                      context, HomeScreen.routeName);
+                                },
+                              );
+                            }
                           },
                           child: Text(
                             AppLocalizations.of(context)!.login,
@@ -111,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .textTheme
                                 .bodySmall!
                                 .copyWith(
-                                color: Theme.of(context).primaryColor)),
+                                    color: Theme.of(context).primaryColor)),
                       ),
                     ],
                   ),

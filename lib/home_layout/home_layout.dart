@@ -1,4 +1,6 @@
+import 'package:app_template/provider/app_provider.dart';
 import 'package:app_template/provider/home_layout_provider.dart';
+import 'package:app_template/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -12,14 +14,35 @@ class HomeScreen extends StatelessWidget {
       create: (context) => HomeLayoutProvider(),
       builder: (context, child) {
         var provider = Provider.of<HomeLayoutProvider>(context);
+        var appProvider = Provider.of<AppProvider>(context);
         return Scaffold(
           resizeToAvoidBottomInset: true,
           extendBody: true,
           appBar: AppBar(
+            toolbarHeight: MediaQuery.of(context).size.height * .1,
             title: Text(
               AppLocalizations.of(context)!.todoList,
               style: Theme.of(context).textTheme.titleLarge,
             ),
+            actions: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Welcome'),
+                  SizedBox(height: 5),
+                  Text(appProvider.currentUser!.firstName)
+                ],
+              ),
+              SizedBox(width: 5),
+              IconButton(
+                onPressed: () {
+                  appProvider.signOut();
+                  Navigator.pushReplacementNamed(
+                      context, LoginScreen.routeName);
+                },
+                icon: Icon(Icons.logout),
+              ),
+            ],
           ),
           bottomNavigationBar: BottomAppBar(
             color: Colors.transparent,

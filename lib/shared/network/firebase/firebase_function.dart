@@ -49,7 +49,7 @@ class FirebaseFunctions {
         );
   }
 
-  static Future<void> getUser(UserModel userModel) {
+  static Future<void> addUserToFireStore(UserModel userModel) {
     var collection = getUsersCollection();
     var docRef = collection.doc(userModel.id);
     return docRef.set(userModel);
@@ -68,7 +68,7 @@ class FirebaseFunctions {
           firstName: firstName,
           lastName: lastName,
           email: email);
-      getUser(userModel).then(
+      addUserToFireStore(userModel).then(
         (value) {
           created();
         },
@@ -82,5 +82,25 @@ class FirebaseFunctions {
     } catch (e) {
       print(e);
     }
+  }
+
+  static void logIn(
+      String email, String password, Function onError, Function login) async {
+    try {
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      login();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        onError(e.code);
+      } else if (e.code == 'wrong-password') {
+        onError(e.code);
+      }
+    }
+  }
+
+  static Future<UserModel?> readUser(String id) async {
+    DocumentSnapshot<UserModel> user = await getUsersCollection().doc(id).get();
+    return user.data();
   }
 }

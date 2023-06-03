@@ -1,4 +1,5 @@
 import 'package:app_template/screens/widget/add_task/custom_edit_textFormField.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -146,6 +147,8 @@ class _EditTaskModalSheetState extends State<EditTaskModalSheet> {
                           onTapped: () {
                             if (editFormKey.currentState!.validate()) {
                               TaskModel updatedTask = TaskModel(
+                                  userId:
+                                      FirebaseAuth.instance.currentUser!.uid,
                                   id: widget.taskModel.id,
                                   title: taskTitleController.text,
                                   description: descriptionController.text,
@@ -157,8 +160,8 @@ class _EditTaskModalSheetState extends State<EditTaskModalSheet> {
                                   time: active == false
                                       ? widget.taskModel.time
                                       : dateTimeProvider.initialTime
-                                          .format(context)
-                                          .toString(),
+                                      .format(context)
+                                      .toString(),
                                   status: status);
                               FirebaseFunctions.updateTask(
                                   widget.taskModel.id, updatedTask);

@@ -1,6 +1,7 @@
 import 'package:app_template/home_layout/home_layout.dart';
 import 'package:app_template/screens/login_screen.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_email_textFormField.dart';
+import 'package:app_template/screens/widget/login_signUp_widgets/custom_name_textFormField.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_password_textFormField.dart';
 import 'package:app_template/shared/network/firebase/firebase_function.dart';
 import 'package:flutter/cupertino.dart';
@@ -70,18 +71,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        CustomTextFormField(
+                        CustomNameTextFormField(
                             label: AppLocalizations.of(context)!.fName,
                             suffix: Icons.person,
                             controller: fNameController),
                         SizedBox(height: 15),
-                        CustomTextFormField(
+                        CustomNameTextFormField(
                           label: AppLocalizations.of(context)!.lName,
                           suffix: Icons.person,
                           controller: lNameController,
                         ),
                         SizedBox(height: 15),
-                        CustomTextFormField(
+                        CustomEmailTextFormField(
                             label: AppLocalizations.of(context)!.email,
                             suffix: Icons.email_outlined,
                             controller: emailController),
@@ -107,6 +108,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 lNameController.text,
                                 emailController.text,
                                 passwordController.text, () {
+                              pro.initUser();
                               Navigator.pushReplacementNamed(
                                   context, HomeScreen.routeName);
                             });

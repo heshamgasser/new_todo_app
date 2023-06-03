@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomEmailTextFormField extends StatelessWidget {
   String label;
   IconData suffix;
   TextEditingController controller;
 
-  CustomTextFormField(
+  CustomEmailTextFormField(
       {required this.label, required this.suffix, required this.controller});
 
   @override
@@ -14,8 +14,13 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: (value) {
-        if (value != null && value.isEmpty) {
+        final bool emailValid = RegExp(
+                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(value!);
+        if (value.isEmpty) {
           return AppLocalizations.of(context)!.fieldRequired;
+        } else if (!emailValid) {
+          return 'Please Enter a Valid Email';
         }
         return null;
       },
