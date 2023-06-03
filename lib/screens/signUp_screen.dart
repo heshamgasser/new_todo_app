@@ -1,6 +1,8 @@
+import 'package:app_template/home_layout/home_layout.dart';
 import 'package:app_template/screens/login_screen.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_email_textFormField.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_password_textFormField.dart';
+import 'package:app_template/shared/network/firebase/firebase_function.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -56,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           backgroundColor: Colors.transparent,
           body: Padding(
             padding:
-                const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
+            const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
             child: Form(
               key: signUpFormKey,
               child: Column(
@@ -99,7 +101,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Theme.of(context).primaryColor),
-                          onPressed: () {},
+                          onPressed: () {
+                            FirebaseFunctions.createAccount(
+                                fNameController.text,
+                                lNameController.text,
+                                emailController.text,
+                                passwordController.text, () {
+                              Navigator.pushReplacementNamed(
+                                  context, HomeScreen.routeName);
+                            });
+                          },
                           child: Text(
                             AppLocalizations.of(context)!.signUp,
                             style: Theme.of(context).textTheme.bodyMedium,
@@ -125,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 .textTheme
                                 .bodySmall!
                                 .copyWith(
-                                color: Theme.of(context).primaryColor)),
+                                    color: Theme.of(context).primaryColor)),
                       ),
                     ],
                   ),
