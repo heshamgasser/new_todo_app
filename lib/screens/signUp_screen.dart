@@ -4,6 +4,7 @@ import 'package:app_template/screens/widget/login_signUp_widgets/custom_email_te
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_name_textFormField.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_password_textFormField.dart';
 import 'package:app_template/shared/network/firebase/firebase_function.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -103,15 +104,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Theme.of(context).primaryColor),
                           onPressed: () {
-                            FirebaseFunctions.createAccount(
-                                fNameController.text,
-                                lNameController.text,
-                                emailController.text,
-                                passwordController.text, () {
-                              pro.initUser();
-                              Navigator.pushReplacementNamed(
-                                  context, HomeScreen.routeName);
-                            });
+                            emailController.text ==
+                                    FirebaseAuth.instance.currentUser!.email
+                                ? FirebaseFunctions.createAccount(
+                                    fNameController.text,
+                                    lNameController.text,
+                                    emailController.text,
+                                    passwordController.text, () {
+                                    pro.initUser();
+                                    Navigator.pushReplacementNamed(
+                                        context, HomeScreen.routeName);
+                                  })
+                                : SnackBar(
+                                    content: Text('Email Already Available'));
                           },
                           child: Text(
                             AppLocalizations.of(context)!.signUp,
