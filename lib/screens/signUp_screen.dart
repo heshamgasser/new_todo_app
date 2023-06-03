@@ -4,6 +4,9 @@ import 'package:app_template/screens/widget/login_signUp_widgets/custom_password
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/app_provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String routeName = 'Sign up Screen';
@@ -24,11 +27,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
 
   bool secure = true;
+  bool selected = true;
 
   GlobalKey<FormState> signUpFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    var pro = Provider.of<AppProvider>(context);
     return Stack(
       children: [
         Image.asset(
@@ -37,6 +42,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
           fit: BoxFit.fill,
         ),
         Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            leading: IconButton(
+              onPressed: () {
+                selected = !selected;
+                pro.changeLanguage(selected ? 'en' : 'ar');
+              },
+              icon: Icon(Icons.language),
+            ),
+          ),
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.transparent,
           body: Padding(
@@ -78,7 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       secure = !secure;
                     },
                     iconData:
-                        secure ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
+                    secure ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
                   ),
                   SizedBox(height: 15),
                   ElevatedButton(
@@ -108,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 .textTheme
                                 .bodySmall!
                                 .copyWith(
-                                    color: Theme.of(context).primaryColor)),
+                                color: Theme.of(context).primaryColor)),
                       ),
                     ],
                   ),

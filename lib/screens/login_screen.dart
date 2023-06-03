@@ -1,10 +1,12 @@
 import 'package:app_template/home_layout/home_layout.dart';
+import 'package:app_template/provider/app_provider.dart';
 import 'package:app_template/screens/signUp_screen.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_email_textFormField.dart';
 import 'package:app_template/screens/widget/login_signUp_widgets/custom_password_textFormField.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = 'Login Screen';
@@ -19,11 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
 
   bool secure = true;
+  bool selected = true;
 
   GlobalKey<FormState> loginFormKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
+    var pro = Provider.of<AppProvider>(context);
     return Stack(
       children: [
         Image.asset(
@@ -34,26 +38,18 @@ class _LoginScreenState extends State<LoginScreen> {
         Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            leading: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('EN'),
-                SizedBox(width: 5),
-                Switch(
-                  value: true,
-                  onChanged: (value) {},
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text('AR'),
-              ],
+            leading: IconButton(
+              onPressed: () {
+                selected = !selected;
+                pro.changeLanguage(selected ? 'en' : 'ar');
+              },
+              icon: Icon(Icons.language),
             ),
           ),
           backgroundColor: Colors.transparent,
           body: Padding(
             padding:
-                const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
+            const EdgeInsets.only(top: 30, left: 10, right: 10, bottom: 10),
             child: Form(
               key: loginFormKey,
               child: Column(
@@ -74,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       secure = !secure;
                     },
                     iconData:
-                        secure ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
+                    secure ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
                   ),
                   SizedBox(height: 15),
                   ElevatedButton(
@@ -107,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 .textTheme
                                 .bodySmall!
                                 .copyWith(
-                                    color: Theme.of(context).primaryColor)),
+                                color: Theme.of(context).primaryColor)),
                       ),
                     ],
                   ),
