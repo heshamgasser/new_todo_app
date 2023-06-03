@@ -17,7 +17,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseFirestore.instance.disableNetwork();
+  FirebaseFirestore.instance.enableNetwork();
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppProvider(),

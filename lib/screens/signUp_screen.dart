@@ -63,49 +63,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  CustomTextFormField(
-                      label: AppLocalizations.of(context)!.fName,
-                      suffix: Icons.person,
-                      controller: fNameController),
-                  SizedBox(height: 15),
-                  CustomTextFormField(
-                    label: AppLocalizations.of(context)!.lName,
-                    suffix: Icons.person,
-                    controller: lNameController,
-                  ),
-                  SizedBox(height: 15),
-                  CustomTextFormField(
-                    label: AppLocalizations.of(context)!.userNameEmail,
-                    suffix: Icons.supervised_user_circle,
-                    controller: usernameController,
-                  ),
-                  SizedBox(height: 15),
-                  CustomTextFormField(
-                      label: AppLocalizations.of(context)!.email,
-                      suffix: Icons.email_outlined,
-                      controller: emailController),
-                  SizedBox(height: 15),
-                  CustomPasswordTextFormField(
-                    label: AppLocalizations.of(context)!.password,
-                    controller: passwordController,
-                    obscure: secure,
-                    onTapped: () {
-                      secure = !secure;
-                    },
-                    iconData:
-                    secure ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
-                  ),
-                  SizedBox(height: 15),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).primaryColor),
-                    onPressed: () {},
-                    child: Text(
-                      AppLocalizations.of(context)!.signUp,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        CustomTextFormField(
+                            label: AppLocalizations.of(context)!.fName,
+                            suffix: Icons.person,
+                            controller: fNameController),
+                        SizedBox(height: 15),
+                        CustomTextFormField(
+                          label: AppLocalizations.of(context)!.lName,
+                          suffix: Icons.person,
+                          controller: lNameController,
+                        ),
+                        SizedBox(height: 15),
+                        CustomTextFormField(
+                            label: AppLocalizations.of(context)!.email,
+                            suffix: Icons.email_outlined,
+                            controller: emailController),
+                        SizedBox(height: 15),
+                        CustomPasswordTextFormField(
+                          label: AppLocalizations.of(context)!.password,
+                          controller: passwordController,
+                          obscure: secure,
+                          onTapped: () {
+                            secure = !secure;
+                          },
+                          iconData: secure
+                              ? CupertinoIcons.eye
+                              : CupertinoIcons.eye_slash,
+                        ),
+                        SizedBox(height: 15),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).primaryColor),
+                          onPressed: () {},
+                          child: Text(
+                            AppLocalizations.of(context)!.signUp,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

@@ -31,7 +31,6 @@
   "fName": "First Name",
   "lName": "Last Name",
   "email": "Email",
-  "userNameEmail": "user Name or Email",
   "password": "Password",
   "login": "Login",
   "signUp": "Sign Up",
